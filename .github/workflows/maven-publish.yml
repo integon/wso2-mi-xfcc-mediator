@@ -28,7 +28,25 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-    - name: Publish to GitHub Packages Apache Maven
-      run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
+    - name: Import GPG key
+      run: |
+        mkdir -p "$HOME/.gnupg"
+        echo "${{ secrets.GPG_PRIVATE_KEY }}" | base64 --decode > "$HOME/.gnupg/private.key"
+        gpg --batch --import "$HOME/.gnupg/private.key"
+        echo "allow-loopback-pinentry" >> "$HOME/.gnupg/gpg-agent.conf"
+        gpg --batch --pinentry-mode loopback --passphrase "${{ secrets.GPG_PASSPHRASE }}" --armor --detach-sign --output target/package.asc pom.xml
       env:
-        GITHUB_TOKEN: ${{ github.token }}
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+    - name: Publish to GitHub Packages Apache Maven
+      run: |
+        mvn deploy -Dgpg.passphrase="${{ secrets.GPG_PASSPHRASE }}" \
+          -Dgpg.keyname="${{ secrets.GPG_KEY_NAME }}" \
+          -Dgpg.executable=gpg \
+          -Dgpg.defaultKeyring=false \
+          -Dgpg.publicKeyring="$HOME/.gnupg/pubring.gpg" \
+          -Dgpg.secretKeyring="$HOME/.gnupg/secring.gpg"
+      env:
+        GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        GPG_KEY_NAME: KEY_ID # Replace KEY_ID with your actual key ID
+

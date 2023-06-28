@@ -18,6 +18,9 @@ import org.apache.synapse.SynapseException;
 import org.apache.synapse.core.axis2.Axis2MessageContext;
 import org.apache.synapse.mediators.AbstractMediator;
 
+/**
+ * Custom mediator for validating client certificates.
+ */
 public class XfccMediator extends AbstractMediator {
 
     private static final String TRUSTSTORE_PATH = System.getenv("TRUSTSTORE_PATH");
@@ -25,6 +28,12 @@ public class XfccMediator extends AbstractMediator {
     private String HEADER_NAME = System.getenv("HEADER_NAME");
     private List<String> ALLOWED_CNS = new ArrayList<>();
 
+    /**
+     * Initializes the XfccMediator by checking environment variables and setting
+     * default values.
+     * 
+     * @throws IllegalStateException If required environment variables are not set.
+     */
     public XfccMediator() {
         if (TRUSTSTORE_PATH == null || TRUSTSTORE_PATH.isEmpty()) {
             throw new IllegalStateException("TRUSTSTORE_PATH environment variable is not set");
@@ -46,6 +55,12 @@ public class XfccMediator extends AbstractMediator {
         }
     }
 
+    /**
+     * Mediation logic for validating the client certificate.
+     *
+     * @param context The message context.
+     * @return True if the client certificate is valid, false otherwise.
+     */
     public boolean mediate(final org.apache.synapse.MessageContext context) {
 
         final Axis2MessageContext axis2MessageContext = (Axis2MessageContext) context;
@@ -97,6 +112,15 @@ public class XfccMediator extends AbstractMediator {
 
     }
 
+    /**
+     * Validates the certificate path of the client certificate.
+     *
+     * @param clientCertificate  The client certificate to be validated.
+     * @param truststorePath     The path to the truststore.
+     * @param truststorePassword The password for the truststore.
+     * @return True if the certificate path is valid, false otherwise.
+     * @throws Exception If an error occurs during the validation process.
+     */
     private static boolean validateCertPath(final X509Certificate clientCertificate, final String truststorePath,
             final String truststorePassword)
             throws Exception {
@@ -127,6 +151,12 @@ public class XfccMediator extends AbstractMediator {
 
     }
 
+    /**
+     * Validates the common name of the client certificate.
+     *
+     * @param clientCertificate The client certificate to be validated.
+     * @return True if the common name is valid, false otherwise.
+     */
     private boolean validateCommonName(final X509Certificate clientCertificate) {
         final String commonName = clientCertificate.getSubjectX500Principal().getName().split(",")[0].split("=")[1];
         if (!ALLOWED_CNS.contains(commonName)) {
@@ -136,6 +166,11 @@ public class XfccMediator extends AbstractMediator {
         return true;
     }
 
+    /**
+     * Retrieves the list of allowed common names from the environment variable.
+     *
+     * @return The list of allowed common names.
+     */
     private static List<String> getAllowedCNs() {
         final String allowedCNsEnv = System.getenv("ALLOWED_CNS");
         if (allowedCNsEnv == null || allowedCNsEnv.isEmpty()) {
@@ -144,6 +179,14 @@ public class XfccMediator extends AbstractMediator {
         return Arrays.asList(allowedCNsEnv.split(","));
     }
 
+    /**
+     * Creates a SynapseException with the provided status code and message.
+     *
+     * @param messageContext The message context.
+     * @param statusCode     The HTTP status code.
+     * @param message        The error message.
+     * @return The SynapseException with the specified properties.
+     */
     private SynapseException errorResponse(final org.apache.synapse.MessageContext messageContext, Integer statusCode,
             final String message) {
         if (statusCode == null) {
@@ -158,6 +201,13 @@ public class XfccMediator extends AbstractMediator {
         return new SynapseException(message);
     }
 
+    /**
+     * Retrieves the value of a specific header from the Axis2 message context.
+     *
+     * @param axis2MessageContext The Axis2 message context.
+     * @param headerName          The name of the header.
+     * @return The value of the header, or null if not found.
+     */
     private static String getHeaderValue(final Axis2MessageContext axis2MessageContext, final String headerName) {
         final Object headers = axis2MessageContext.getAxis2MessageContext()
                 .getProperty(org.apache.axis2.context.MessageContext.TRANSPORT_HEADERS);
