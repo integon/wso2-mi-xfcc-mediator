@@ -26,12 +26,18 @@ jobs:
       run: mvn package
       id: build_maven
 
+
+    - name: Zip source code
+      run: zip -r source-code.zip .
+      working-directory: ${{ github.workspace }}
     
     - name: Create Release
       id: create_release
       uses: softprops/action-gh-release@v1
       with:
-        files: ./target/wso2-mi-xfcc-mediator-${{ env.RELEASE_VERSION }}.jar
+        files: |
+          ./target/wso2-mi-xfcc-mediator-${{ env.RELEASE_VERSION }}.jar
+          source-code.zip
         tag_name: v${{ env.RELEASE_VERSION }}
         name: Release v${{ env.RELEASE_VERSION }}
         body: |
