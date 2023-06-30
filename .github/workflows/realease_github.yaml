@@ -26,25 +26,18 @@ jobs:
       run: mvn package
       id: build_maven
 
+    
     - name: Create Release
-      uses: actions/create-release@v1
       id: create_release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      uses: softprops/action-gh-release@v1
       with:
+        files: ./target/wso2-mi-xfcc-mediator-${{ env.RELEASE_VERSION }}.jar
         tag_name: v${{ env.RELEASE_VERSION }}
-        release_name: Release v${{ env.RELEASE_VERSION }}
+        name: Release v${{ env.RELEASE_VERSION }}
         body: |
-          Release v${{ env.RELEASE_VERSION }} for the wso2-mi-xfcc-mediator. 
+          Release v${{ env.RELEASE_VERSION }} for the wso2-mi-xfcc-mediator.
         draft: false
         prerelease: false
-
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ./target/wso2-mi-xfcc-mediator-${{ env.RELEASE_VERSION }}.jar
-        asset_name: wso2-mi-xfcc-mediator-${{ env.RELEASE_VERSION }}.jar
-        asset_content_type: application/java-archive
+    
