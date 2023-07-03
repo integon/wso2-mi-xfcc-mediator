@@ -8,6 +8,7 @@
   <version>1.0.0</version>
   <name>wso2-mi-xfcc-mediator</name>
   <url>https://github.com/integon/wso2-mi-xfcc-mediator</url>
+  <description>The XfccMediator is a custom mediator for WSO2 Micro Integrator that performs validation of client certificates based on X.509 certificates.</description>
 
   <licenses>
     <license>
@@ -30,7 +31,11 @@
     </developer>
   </developers>
 
-
+   <scm>
+     <connection>scm:git:git://github.com/integon/wso2-mi-xfcc-mediator.git</connection>
+     <developerConnection>scm:git:ssh://github.com:integon/wso2-mi-xfcc-mediator.git</developerConnection>
+     <url>http://github.com/integon/wso2-mi-xfcc-mediator/tree/master</url>
+   </scm>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
