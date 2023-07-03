@@ -2,12 +2,12 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>com.example</groupId>
+  <groupId>io.integon</groupId>po
   <artifactId>wso2-mi-xfcc-mediator</artifactId>
   <packaging>jar</packaging>
   <version>1.0.0</version>
   <name>wso2-mi-xfcc-mediator</name>
-  <url>http://maven.apache.org</url>
+  <url>https://github.com/integon/wso2-mi-xfcc-mediator</url>
 
   <licenses>
     <license>
@@ -17,12 +17,38 @@
     </license>
   </licenses>
 
+  <developers>
+    <developer>
+      <id>Integon</id>
+      <name>Mathias Paris</name>
+      <email>support@integon.ch</email>
+      <organization>integon</organization>
+      <organizationUrl>https://www.integon.io/</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
+
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+    <repository>
+      <id>ossrh</id>
+      <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+  </distributionManagement>
+
   
   <pluginRepositories>
     <pluginRepository>
@@ -214,6 +240,20 @@
             <id>attach-source</id>
             <goals>
               <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>1.5</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
             </goals>
           </execution>
         </executions>
