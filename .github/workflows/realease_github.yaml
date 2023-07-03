@@ -8,7 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       VERSION: default
-      MAVEN_USERNAME: support@integon.ch
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -57,7 +56,7 @@ jobs:
     - name: Publish to Apache Maven Central
       run: mvn deploy
       env:
-        MAVEN_USERNAME: $MAVEN_USERNAME
+        MAVEN_USERNAME: support@integon.ch
         MAVEN_CENTRAL_TOKEN: ${{ secrets.MAVEN_CENTRAL_TOKEN }}
         MAVEN_GPG_PASSPHRASE: ${{ secrets.MAVEN_GPG_PASSPHRASE }}
 
