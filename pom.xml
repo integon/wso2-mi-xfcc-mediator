@@ -5,7 +5,7 @@
   <groupId>io.integon</groupId>
   <artifactId>wso2-mi-xfcc-mediator</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <name>wso2-mi-xfcc-mediator</name>
   <url>https://github.com/integon/wso2-mi-xfcc-mediator</url>
   <description>The XfccMediator is a custom mediator for WSO2 Micro Integrator that performs validation of client certificates based on X.509 certificates.</description>
