@@ -24,7 +24,25 @@ To use the `XfccMediator`, you need to have the following prerequisites:
 
 ## Installation
 
-TODO
+### With pom.xml
+
+Add the following dependency to your pom.xml
+```xml
+<dependency>
+  <groupId>io.integon</groupId>
+  <artifactId>wso2-mi-xfcc-mediator</artifactId>
+  <version>1.0.1</version>
+</dependency>
+```
+
+These dependencies are required for the wso2-mi-xfcc-mediator to work. 
+
+### Without pom.xml
+
+Add the wso2-mi-xfcc-mediator jar to the MI Folder "/home/wso2carbon/wso2mi-{version}/lib"
+
+
+the .jar artifact is available on the maven central repository [here](https://s01.oss.sonatype.org/service/local/repositories/releases/content/io/integon/wso2-mi-xfcc-mediator/1.0.1/wso2-mi-xfcc-mediator-1.0.1.jar) or as a release artefact on GitHub [here](https://github.com/integon/wso2-mi-xfcc-mediator/releases)
 
 ## Configuration
 
