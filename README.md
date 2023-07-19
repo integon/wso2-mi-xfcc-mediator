@@ -29,9 +29,9 @@ To use the `XfccMediator`, you need to have the following prerequisites:
 Add the following dependency to your pom.xml
 ```xml
 <dependency>
-  <groupId>io.integon</groupId>
+  <groupId>io.integon.wso2mi.xfcc</groupId>
   <artifactId>wso2-mi-xfcc-mediator</artifactId>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 </dependency>
 ```
 
@@ -42,7 +42,7 @@ These dependencies are required for the wso2-mi-xfcc-mediator to work.
 Add the wso2-mi-xfcc-mediator jar to the MI Folder "/home/wso2carbon/wso2mi-{version}/lib"
 
 
-the .jar artifact is available on the maven central repository [here](https://s01.oss.sonatype.org/service/local/repositories/releases/content/io/integon/wso2-mi-xfcc-mediator/1.0.1/wso2-mi-xfcc-mediator-1.0.1.jar) or as a release artefact on GitHub [here](https://github.com/integon/wso2-mi-xfcc-mediator/releases)
+the .jar artifact is available on the maven central repository [here](https://s01.oss.sonatype.org/service/local/repositories/releases/content/io/integon/wso2mi/xfcc/wso2-mi-xfcc-mediator/1.0.2/wso2-mi-xfcc-mediator-1.0.2.jar) or as a release artifact on GitHub [here](https://github.com/integon/wso2-mi-xfcc-mediator/releases)
 
 ## Configuration
 
@@ -53,7 +53,7 @@ To configure the `XfccMediator`, follow these steps:
 
 ## Usage
 
-To use the `XfccMediator`, you need to include it in your integration sequence or endpoint configuration within the WSO2 Micro Integrator. Here's an example of how to use it:
+To use the `XfccMediator`, you must include it in your integration sequence or endpoint configuration within the WSO2 Micro Integrator. Here's an example of how to use it:
 
 ```xml
 <?xml version="1.0" encoding="uTF-8"?>
