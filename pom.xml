@@ -2,10 +2,10 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>io.integon</groupId>
+  <groupId>io.integon.wso2mi.xfcc</groupId>
   <artifactId>wso2-mi-xfcc-mediator</artifactId>
   <packaging>jar</packaging>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <name>wso2-mi-xfcc-mediator</name>
   <url>https://github.com/integon/wso2-mi-xfcc-mediator</url>
   <description>The XfccMediator is a custom mediator for WSO2 Micro Integrator that performs validation of client certificates based on X.509 certificates.</description>
@@ -21,7 +21,7 @@
   <developers>
     <developer>
       <id>Integon</id>
-      <name>Mathias Paris</name>
+      <name>Integon</name>
       <email>support@integon.ch</email>
       <organization>integon</organization>
       <organizationUrl>https://www.integon.io/</organizationUrl>
